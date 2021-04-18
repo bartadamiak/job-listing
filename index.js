@@ -115,9 +115,6 @@ function addFilter() {
         skills[i].addEventListener("click", function () {
             const activeFilter = document.querySelectorAll(".filter-name");
 
-
-
-
             let permission = true;
 
             filterBox.classList.remove('hide')
@@ -134,23 +131,43 @@ function addFilter() {
             if (permission) {
                 let newFilter = document.createElement('div');
                 newFilter.classList.add('filter')
-                filterBox.appendChild(newFilter)
+                filterBox.appendChild(newFilter);
 
                 let newName = document.createElement('p');
                 newName.classList.add('filter-name');
                 newName.innerText = skills[i].innerText
-                newFilter.appendChild(newName)
+                newFilter.appendChild(newName);
 
                 let newClose = document.createElement('div');
                 newClose.classList.add('filter-close');
                 newClose.innerText = 'X';
-                newFilter.appendChild(newClose)
+                newFilter.appendChild(newClose);
+
+
+                const allSkills = document.querySelectorAll('.offer-info p');
+                console.log(allSkills.parentElement)
+
+                
+
+               
+
             }
 
+
+
+
             const filterClose = document.querySelectorAll('.filter-close');
+
             filterClose.forEach(element => {
                 element.addEventListener("click", function () {
-                    element.parentElement.remove()
+                    element.parentElement.remove();
+
+                    const activeFilterTab = document.querySelectorAll('.filter-name');
+
+                    if (activeFilterTab.length == 0) {
+                        filterBox.classList.add('hide')
+                    }
+
                 })
             });
 
