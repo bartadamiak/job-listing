@@ -13,7 +13,8 @@ fetch("/data.json")
     })
     .then(function (data) {
         createElement(data);
-        addFilter()
+        addFilter();
+
 
 
     })
@@ -117,7 +118,14 @@ function addFilter() {
 
             let permission = true;
 
-            filterBox.classList.remove('hide')
+            filterBox.classList.remove('hide');
+
+
+            const activeBoxes = document.querySelectorAll('.box')
+
+            activeBoxes.forEach(element => {
+                element.classList.add('hide')
+            });
 
             for (let j = 0; j < activeFilter.length; j++) {
 
@@ -143,13 +151,27 @@ function addFilter() {
                 newClose.innerText = 'X';
                 newFilter.appendChild(newClose);
 
+                let skillsInner = [];
 
-                const allSkills = document.querySelectorAll('.offer-info p');
-                console.log(allSkills.parentElement)
-
+                skills.forEach(element => {
+                    skillsInner.push(element)
+                    
+                });
+                
                 
 
-               
+                function checkTab(value) {
+                    return value.innerText == newName.innerText
+                   
+                    
+                }
+                
+                let result = skillsInner.filter(checkTab);
+              
+
+                result.forEach(element => {
+                    element.parentElement.parentElement.classList.remove('hide')
+                });
 
             }
 
@@ -160,12 +182,21 @@ function addFilter() {
 
             filterClose.forEach(element => {
                 element.addEventListener("click", function () {
+   
+
                     element.parentElement.remove();
 
+                    
+
+                    
                     const activeFilterTab = document.querySelectorAll('.filter-name');
+                   
 
                     if (activeFilterTab.length == 0) {
-                        filterBox.classList.add('hide')
+                        filterBox.classList.add('hide');
+                        activeBoxes.forEach(element => {
+                            element.classList.remove('hide')
+                        });
                     }
 
                 })
@@ -176,9 +207,23 @@ function addFilter() {
 
 
 
+
     };
+
+    
+    
 
 
 
 }
+
+
+
+// function checkTab(value) {
+//     return value == dorcia.innerText
+    
+// }
+
+// let result = tabli.filter(checkTab);
+
 
