@@ -1,12 +1,3 @@
-
-const box = document.querySelector(".box");
-const body = document.querySelector("body");
-const filterBox = document.querySelector('.filter-box');
-const filter = document.querySelector('.filter');
-
-
-
-
 fetch("/data.json")
     .then(response => {
         return response.json()
@@ -22,15 +13,14 @@ fetch("/data.json")
 
 
 
-
-
-
-
 function createElement(file) {
+    const box = document.querySelector(".box");
+    const site = document.querySelector('.site');
+
     for (let i = 0; i < file.length; i++) {
 
         let newBox = box.cloneNode(true);
-        body.appendChild(newBox);
+        site.appendChild(newBox);
 
 
 
@@ -107,6 +97,8 @@ function createElement(file) {
 
 function addFilter() {
     const skills = document.querySelectorAll('.skill');
+    const filterBox = document.querySelector('.filter-box');
+    const filter = document.querySelector('.filter');
 
 
 
@@ -114,18 +106,21 @@ function addFilter() {
 
 
         skills[i].addEventListener("click", function () {
-            const activeFilter = document.querySelectorAll(".filter-name");
+
+            const boxes = document.querySelectorAll('.box')
 
             let permission = true;
 
             filterBox.classList.remove('hide');
 
-
-            const activeBoxes = document.querySelectorAll('.box')
-
-            activeBoxes.forEach(element => {
+            boxes.forEach(element => {
                 element.classList.add('hide')
+
             });
+
+
+
+            const activeFilter = document.querySelectorAll(".filter-name");
 
             for (let j = 0; j < activeFilter.length; j++) {
 
@@ -151,30 +146,28 @@ function addFilter() {
                 newClose.innerText = 'X';
                 newFilter.appendChild(newClose);
 
-                let skillsInner = [];
 
-                skills.forEach(element => {
-                    skillsInner.push(element)
-                    
-                });
-                
-                
 
-                function checkTab(value) {
-                    return value.innerText == newName.innerText
-                   
-                    
-                }
-                
-                let result = skillsInner.filter(checkTab);
-              
 
-                result.forEach(element => {
-                    element.parentElement.parentElement.classList.remove('hide')
-                });
+
 
             }
+            const currentFilter = document.querySelectorAll('.filter-name');
+            const skillToFilter = document.querySelectorAll('.skill');
 
+            currentFilter.forEach(element => {
+
+                for (let s = 0; s < skillToFilter.length; s++) {
+
+                    if (element.innerText == skillToFilter[s].innerText) {
+                  
+                        skillToFilter[s].parentElement.parentElement.classList.remove('hide')
+                    }
+
+
+                }
+
+            });
 
 
 
@@ -182,19 +175,32 @@ function addFilter() {
 
             filterClose.forEach(element => {
                 element.addEventListener("click", function () {
-   
+
 
                     element.parentElement.remove();
 
-                    
 
-                    
                     const activeFilterTab = document.querySelectorAll('.filter-name');
+
+                    activeFilterTab.forEach(element => {
+
+                        for (let s = 0; s < skillToFilter.length; s++) {
+
+                            if (element.previousSiblingElement.innerText == skillToFilter[s].innerText) {
                    
+                                skillToFilter[s].parentElement.parentElement.classList.add('hide')
+                            }
+
+
+                        }
+
+                    });
+
+
 
                     if (activeFilterTab.length == 0) {
                         filterBox.classList.add('hide');
-                        activeBoxes.forEach(element => {
+                        boxes.forEach(element => {
                             element.classList.remove('hide')
                         });
                     }
@@ -210,20 +216,13 @@ function addFilter() {
 
     };
 
-    
-    
+
+
 
 
 
 }
 
 
-
-// function checkTab(value) {
-//     return value == dorcia.innerText
-    
-// }
-
-// let result = tabli.filter(checkTab);
 
 
