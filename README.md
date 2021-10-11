@@ -1,3 +1,3 @@
 Challange from https://frontendmentor.io/
 
-My version: https://cutt.ly/nvLuslO
+My version: http://bartadamiak.site/job-search/
