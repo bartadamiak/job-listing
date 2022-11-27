@@ -1,3 +1,3 @@
 Challange from https://frontendmentor.io/
 
-My version: http://bartadamiak.biz.pl/job-search/
+My version: http://badamiak.pl/job-search/
